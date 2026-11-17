@@ -1,0 +1,4 @@
+﻿system,model,run,seed,n_test,elapsed_seconds,type_accuracy,type_balanced_accuracy,type_macro_precision,type_macro_recall,type_macro_f1,type_weighted_f1,severity_accuracy,severity_balanced_accuracy,severity_macro_f1,severity_weighted_f1,severity_ordinal_mae
+ml,ml,1,42,100,1.054,1.0,1.0,1.0,1.0,1.0,1.0,0.58,0.5262214342001575,0.5207482993197279,0.5737414965986395,0.42
+ml,ml,2,43,100,0.536,1.0,1.0,1.0,1.0,1.0,1.0,0.58,0.5262214342001575,0.5207482993197279,0.5737414965986395,0.42
+ml,ml,3,44,100,0.519,1.0,1.0,1.0,1.0,1.0,1.0,0.58,0.5262214342001575,0.5207482993197279,0.5737414965986395,0.42

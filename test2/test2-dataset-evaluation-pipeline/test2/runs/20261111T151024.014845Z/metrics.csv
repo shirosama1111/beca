@@ -1,0 +1,2 @@
+﻿system,model,run,seed,n_test,elapsed_seconds,type_accuracy,type_balanced_accuracy,type_macro_precision,type_macro_recall,type_macro_f1,type_weighted_f1,severity_accuracy,severity_balanced_accuracy,severity_macro_f1,severity_weighted_f1,severity_ordinal_mae
+rule,rule,1,42,100,0.081,0.59,0.5561178587494378,0.672953216374269,0.5561178587494376,0.5519818602014563,0.568016570008285,0.35,0.27049842395587076,0.25067783094098883,0.33581977671451346,0.8

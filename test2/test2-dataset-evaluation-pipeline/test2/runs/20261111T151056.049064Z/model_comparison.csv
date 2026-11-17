@@ -1,0 +1,2 @@
+﻿system,model,bug_type.accuracy_mean,bug_type.accuracy_std,bug_type.macro_f1_mean,bug_type.macro_f1_std,bug_type.weighted_f1_mean,bug_type.weighted_f1_std,severity.accuracy_mean,severity.accuracy_std,severity.macro_f1_mean,severity.macro_f1_std,severity.weighted_f1_mean,severity.weighted_f1_std,severity_ordinal_mae_mean,severity_ordinal_mae_std
+ml,ml,1.0,0.0,1.0,0.0,1.0,0.0,0.58,0.0,0.5207482993197279,0.0,0.5737414965986395,0.0,0.42,0.0

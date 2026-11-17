@@ -1,0 +1,45 @@
+{
+  "n_samples": 1000,
+  "label_distribution": {
+    "API": 337,
+    "LOGIC": 325,
+    "UI": 338
+  },
+  "severity_distribution": {
+    "CRITICAL": 74,
+    "HIGH": 247,
+    "LOW": 188,
+    "MEDIUM": 491
+  },
+  "split_distribution": {
+    "test": 100,
+    "train": 800,
+    "val": 100
+  },
+  "annotation_status_distribution": {
+    "synthetic-unverified": 1000
+  },
+  "text_length_chars": {
+    "mean": 467.03,
+    "median": 458.0,
+    "min": 362,
+    "max": 642
+  },
+  "missing_or_empty_fields": {
+    "bug_description": 0,
+    "steps_to_reproduce": 0,
+    "console_logs": 0,
+    "error_context": 0,
+    "root_cause": 0,
+    "resolution": 0
+  },
+  "duplicate_ids": 0,
+  "duplicate_nonempty_texts": 0,
+  "invalid_type_labels": 0,
+  "invalid_severity_labels": 0,
+  "warnings": [
+    "Metrics measure agreement with existing annotations; synthetic-unverified labels are not verified ground truth.",
+    "Check leakage across train/test by source scenario/template before interpreting scores.",
+    "Empty fields may be optional and are not necessarily data errors."
+  ]
+}
