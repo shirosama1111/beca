@@ -30,15 +30,14 @@ public class ErrorReportService {
     private final ErrorReportHistoryRepository historyRepository;
 
     public ErrorReport create(CreateReportRequest request, Long reporterUserId) {
-        // ��� Nếu priority null, prioritize default MEDIUM (AI sẽ classify sau)
-        String initialPriority = request.getPriority() != null ? request.getPriority() : "MEDIUM";
-
+        // Priority is an AI-generated estimate. Ignore any value supplied by the client;
+        // MEDIUM is only the temporary display value until asynchronous classification completes.
         ErrorReport report = ErrorReport.builder()
                 .title(request.getTitle())
                 .description(request.getDescription())
                 .image(request.getImage())
                 .url(request.getUrl())
-                .priority(initialPriority)  // 🔵 Set MEDIUM mặc định, AI sẽ update
+                .priority("MEDIUM")
                 .reporterType(request.getReporterType() != null ? request.getReporterType() : "USER")
                 .reporterName(request.getReporterName())
                 .reporterEmail(request.getReporterEmail())
@@ -58,7 +57,6 @@ public class ErrorReportService {
         ErrorReport saved = repository.save(report);
         NotificationService.publishNewReport(saved);
 
-        // 🔵 AI async classification (sẽ updated priority nếu HTTP priority là null)
         aiClassifierService.classifyAndAssign(saved.getId(), saved.getTitle(), saved.getDescription(), saved.getConsoleErrors());
 
         return saved;

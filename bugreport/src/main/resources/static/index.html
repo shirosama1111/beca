@@ -10,130 +10,40 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-<!-- ── Navbar ── -->
 <nav class="topbar">
-  <div class="brand">
-    <div class="logo">BR</div>
-    <span class="brand-name">BugReport</span>
-  </div>
+  <div class="brand"><div class="logo">BR</div><span class="brand-name">BugReport</span></div>
   <div class="nav-actions">
     <button class="btn-icon" title="Notifications"><i class="fa-solid fa-bell"></i></button>
     <button class="btn-icon" title="Profile"><i class="fa-solid fa-user"></i></button>
-    <button class="btn btn-primary" id="newReportBtn">
-      <i class="fa-solid fa-plus"></i> New Report
-    </button>
+    <button class="btn btn-primary" id="newReportBtn"><i class="fa-solid fa-plus"></i> New Report</button>
     <div style="display:flex;gap:8px;margin:0 auto">
-      <button class="btn btn-ghost" onclick="currentView='all';loadReports()" id="btn-all-reports">
-        <i class="fa-solid fa-list"></i> All Reports
-      </button>
-      <button class="btn btn-ghost" onclick="currentView='my';loadMyReports()" id="btn-my-reports">
-        <i class="fa-solid fa-bookmark"></i> My Reports
-      </button>
-      <a class="btn btn-ghost" href="/ai-review.html" title="Sử dụng AI phân tích lỗi">
-        <i class="fa-solid fa-wand-magic-sparkles"></i> AI
-      </a>
-      <button class="btn btn-ghost" id="adminAiBtn" title="Công cụ AI dành cho quản trị viên">
-        <i class="fa-solid fa-shield-halved"></i> AI Admin
-      </button>
+      <button class="btn btn-ghost" onclick="currentView='all';loadReports()" id="btn-all-reports"><i class="fa-solid fa-list"></i> All Reports</button>
+      <button class="btn btn-ghost" onclick="currentView='my';loadMyReports()" id="btn-my-reports"><i class="fa-solid fa-bookmark"></i> My Reports</button>
+      <a class="btn btn-ghost" href="/ai-review.html" title="Sử dụng AI phân tích lỗi"><i class="fa-solid fa-wand-magic-sparkles"></i> AI phân tích</a>
+      <button class="btn btn-ghost" id="adminAiBtn" title="Công cụ AI dành cho quản trị viên"><i class="fa-solid fa-shield-halved"></i> AI Admin</button>
     </div>
-    <button class="btn btn-ghost" onclick="logout()">
-      <i class="fa-solid fa-right-from-bracket"></i>
-    </button>
+    <button class="btn btn-ghost" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></button>
   </div>
 </nav>
-
 <div class="container" style="padding-top:24px">
-
-  <!-- ── Stats ── -->
   <div class="stats-grid">
-    <div class="card stat-card cyan fade-in stagger-1">
-      <div class="stat-glow"></div>
-      <div class="stat-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-      <div class="stat-number" id="stat-open">—</div>
-      <div class="stat-label">Open</div>
-    </div>
-    <div class="card stat-card blue fade-in stagger-2">
-      <div class="stat-glow"></div>
-      <div class="stat-icon"><i class="fa-solid fa-spinner"></i></div>
-      <div class="stat-number" id="stat-progress">—</div>
-      <div class="stat-label">In Progress</div>
-    </div>
-    <div class="card stat-card green fade-in stagger-3">
-      <div class="stat-glow"></div>
-      <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
-      <div class="stat-number" id="stat-resolved">—</div>
-      <div class="stat-label">Resolved</div>
-    </div>
-    <div class="card stat-card violet fade-in stagger-4">
-      <div class="stat-glow"></div>
-      <div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div>
-      <div class="stat-number" id="stat-total">—</div>
-      <div class="stat-label">Total</div>
-    </div>
+    <div class="card stat-card cyan fade-in stagger-1"><div class="stat-glow"></div><div class="stat-icon"><i class="fa-solid fa-circle-exclamation"></i></div><div class="stat-number" id="stat-open">—</div><div class="stat-label">Open</div></div>
+    <div class="card stat-card blue fade-in stagger-2"><div class="stat-glow"></div><div class="stat-icon"><i class="fa-solid fa-spinner"></i></div><div class="stat-number" id="stat-progress">—</div><div class="stat-label">In Progress</div></div>
+    <div class="card stat-card green fade-in stagger-3"><div class="stat-glow"></div><div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div><div class="stat-number" id="stat-resolved">—</div><div class="stat-label">Resolved</div></div>
+    <div class="card stat-card violet fade-in stagger-4"><div class="stat-glow"></div><div class="stat-icon"><i class="fa-solid fa-layer-group"></i></div><div class="stat-number" id="stat-total">—</div><div class="stat-label">Total</div></div>
   </div>
-
-  <!-- ── Priority Stats ── -->
-  <div class="card fade-in" style="grid-column:1/-1;padding:20px;margin-top:12px">
-    <h3 style="margin:0 0 16px 0;color:var(--text);font-size:1rem">Distribution by Priority</h3>
-    <div id="priority-chart" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px">
-      <!-- Populated by loadStats() -->
-    </div>
-  </div>
-
-  <!-- ── Filters ── -->
+  <div class="card fade-in" style="grid-column:1/-1;padding:20px;margin-top:12px"><h3 style="margin:0 0 16px 0;color:var(--text);font-size:1rem">Distribution by Priority</h3><div id="priority-chart" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px"></div></div>
   <div class="filters-bar fade-in">
-    <div class="search-wrap">
-      <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-      <input class="input" id="search-input" type="text" placeholder="Search reports…">
-    </div>
-    <select class="input" id="filter-status" style="width:auto;min-width:140px">
-      <option value="">All Status</option>
-      <option value="OPEN">Open</option>
-      <option value="IN_PROGRESS">In Progress</option>
-      <option value="RESOLVED">Resolved</option>
-      <option value="CLOSED">Closed</option>
-      <option value="WONT_FIX">Won't Fix</option>
-    </select>
-    <select class="input" id="filter-priority" style="width:auto;min-width:140px">
-      <option value="">All Priority</option>
-      <option value="CRITICAL">Critical</option>
-      <option value="HIGH">High</option>
-      <option value="MEDIUM">Medium</option>
-      <option value="LOW">Low</option>
-    </select>
-    <select class="input" id="filter-category" style="width:auto;min-width:140px">
-      <option value="">All Category</option>
-      <option value="UI">UI</option>
-      <option value="API">API</option>
-      <option value="PERFORMANCE">Performance</option>
-      <option value="SECURITY">Security</option>
-    </select>
-    <button class="btn btn-ghost" id="btn-clear-filters">
-      <i class="fa-solid fa-xmark"></i> Clear
-    </button>
+    <div class="search-wrap"><span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input class="input" id="search-input" type="text" placeholder="Search reports…"></div>
+    <select class="input" id="filter-status" style="width:auto;min-width:140px"><option value="">All Status</option><option value="OPEN">Open</option><option value="IN_PROGRESS">In Progress</option><option value="RESOLVED">Resolved</option><option value="CLOSED">Closed</option><option value="WONT_FIX">Won't Fix</option></select>
+    <select class="input" id="filter-priority" style="width:auto;min-width:140px"><option value="">All Priority</option><option value="CRITICAL">Critical</option><option value="HIGH">High</option><option value="MEDIUM">Medium</option><option value="LOW">Low</option></select>
+    <select class="input" id="filter-category" style="width:auto;min-width:140px"><option value="">All Category</option><option value="UI">UI</option><option value="API">API</option><option value="PERFORMANCE">Performance</option><option value="SECURITY">Security</option></select>
+    <button class="btn btn-ghost" id="btn-clear-filters"><i class="fa-solid fa-xmark"></i> Clear</button>
   </div>
-
-  <!-- ── Reports Grid ── -->
-  <div id="reports-container" class="reports-grid">
-    <!-- Report cards rendered by app.js -->
-  </div>
-
+  <div id="reports-container" class="reports-grid"></div>
 </div>
-
-<!-- ── Report Detail Modal ── -->
-<div id="report-modal" class="modal-overlay hidden" onclick="handleModalClick(event)">
-  <div class="modal-content" id="modal-content-box">
-    <div class="modal-header">
-      <div class="modal-title" id="modal-title">Report Details</div>
-      <button class="btn-close" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="modal-body" id="modal-body">
-      <!-- populated by app.js -->
-    </div>
-  </div>
-</div>
-
+<div id="report-modal" class="modal-overlay hidden" onclick="handleModalClick(event)"><div class="modal-content" id="modal-content-box"><div class="modal-header"><div class="modal-title" id="modal-title">Report Details</div><button class="btn-close" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body" id="modal-body"></div></div></div>
 <script src="js/app.js"></script>
+<script src="js/ai-severity-ui.js"></script>
 </body>
 </html>

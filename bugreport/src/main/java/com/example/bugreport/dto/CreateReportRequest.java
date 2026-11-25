@@ -8,7 +8,8 @@ public class CreateReportRequest {
     private String description;
     private String image;
     private String url;
-    private String priority;  // 🔵 Thay từ Priority thành String (có thể null)
+    // Kept for backward compatibility with older clients; server-side AI determines priority.
+    private String priority;
     private String reporterType = "USER";
     private String reporterName;
     private String reporterEmail;
